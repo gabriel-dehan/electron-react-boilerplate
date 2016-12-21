@@ -23,19 +23,31 @@ export default merge(baseConfig, {
   module: {
     loaders: [
       {
-        test: /\.global\.css$/,
-        loaders: [
-          'style-loader',
-          'css-loader?sourceMap'
-        ]
-      },
-
-      {
-        test: /^((?!\.global).)*\.css$/,
+        test: /\.css$/,
         loaders: [
           'style-loader',
           'css-loader?modules&sourceMap&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]'
         ]
+      },
+      {
+        test: /\.woff$/,
+        loader: "url-loader?limit=10000&mimetype=application/font-woff&name=[path][name].[ext]"
+      },
+      {
+        test: /\.woff2$/,
+        loader: "url-loader?limit=10000&mimetype=application/font-woff2&name=[path][name].[ext]"
+      },
+      {
+        test   : /\.(ttf|eot|svg|woff(2)?)(\?[a-z0-9=&.]+)?$/,
+        loader : 'file-loader'
+      },
+      {
+        test: /\.(gif|png|jpg)$/,
+        loader: "file-loader"
+      },
+      {
+        test: /\.scss|\.css$/,
+        loader: 'style!css!sass?outputStyle=expanded'
       }
     ]
   },
